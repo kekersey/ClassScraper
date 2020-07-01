@@ -47,7 +47,6 @@ def main():
             time.sleep(10)
     except KeyboardInterrupt:
         print("KeyboardInterrupt has been caught.")
-    print("done")
 
 if __name__ == "__main__":
     main()
