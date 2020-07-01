@@ -27,9 +27,9 @@ def check_classes( class_urls ):
     for i in class_urls:
         class_page = requests.get( i )
         class_soup = BeautifulSoup( class_page.content, "html.parser" )
-        class_name = class_soup.find( 'h2' ).string.strip()
+        class_name = class_soup.find( 'h2' ).string.strip().replace("\xa0", "")
         available_seats = class_soup.find( 'dt', text='Available Seats').findNext( 'dd' ).string
-        class_and_seats.append( class_name, available_seats )
+        class_and_seats.append( (class_name, available_seats) )
     return class_and_seats
 
 
@@ -41,7 +41,7 @@ def main():
     classes = get_course_urls(classes)
     try:
         while True:
-            check_classes( classes )
+            print(check_classes( classes ))
             time.sleep(10)
     except KeyboardInterrupt:
         print("KeyboardInterrupt has been caught.")
