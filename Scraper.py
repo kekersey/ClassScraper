@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import time
+import winsound
 
 
 def get_class_numbers():
@@ -28,20 +29,21 @@ def check_classes( class_urls ):
         class_page = requests.get( i )
         class_soup = BeautifulSoup( class_page.content, "html.parser" )
         class_name = class_soup.find( 'h2' ).string.strip().replace("\xa0", "")
-        available_seats = class_soup.find( 'dt', text='Available Seats').findNext( 'dd' ).string
+        available_seats = int(class_soup.find( 'dt', text='Available Seats').findNext( 'dd' ).string)
         class_and_seats.append( (class_name, available_seats) )
+        if( available_seats > 0 ):
+            notify()
     return class_and_seats
 
-
 def notify():
-    pass
+    winsound.Beep( 440, 1000 )
 
 def main():
     classes = get_class_numbers()
     classes = get_course_urls(classes)
     try:
         while True:
-            print
+            check_classes( classes )
             time.sleep(10)
     except KeyboardInterrupt:
         print("KeyboardInterrupt has been caught.")
