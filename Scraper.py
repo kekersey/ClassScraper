@@ -41,7 +41,7 @@ def main():
     classes = get_course_urls(classes)
     try:
         while True:
-            print(check_classes( classes ))
+            print
             time.sleep(10)
     except KeyboardInterrupt:
         print("KeyboardInterrupt has been caught.")
