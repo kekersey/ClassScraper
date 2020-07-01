@@ -3,15 +3,11 @@ import requests
 import time
 import winsound
 
-
 def get_class_numbers():
-    courses = open("courses.txt", "r")
-    raw_numbers = courses.readlines()
-    courses.close()
-    stripped_numbers = list()
-    for course in raw_numbers:
-        stripped_numbers.append( course.strip() )
-    return stripped_numbers
+    with open("courses.txt", "r") as f:
+        raw_crn = f.readlines()
+    stripped_crn = [ crn.strip() for crn in raw_crn ]
+    return stripped_crn
 
 def get_course_urls(stripped_numbers):
     class_urls = list()
