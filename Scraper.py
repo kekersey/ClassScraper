@@ -9,12 +9,12 @@ def get_class_numbers():
     stripped_crn = [ crn.strip() for crn in raw_crn ]
     return stripped_crn
 
-def get_course_urls(stripped_numbers):
+def get_course_urls(stripped_crn):
     class_urls = list()
     with open("index.html", "r") as f:
         page = f.read()
     index_soup = BeautifulSoup( page, 'html.parser')
-    for course_number in stripped_numbers:
+    for course_number in stripped_crn:
         for url in index_soup.find_all('a', id="class_nbr_" + course_number):
             class_urls.append( url.get('href') )
     return class_urls
