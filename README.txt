@@ -1,1 +1,1 @@
-# UCSC_Scraper
+ClassScraper
